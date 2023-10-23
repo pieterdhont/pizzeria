@@ -98,6 +98,7 @@ form input[type="submit"]:disabled {
 
 #accountFields {
   width: 100%;
+  display: none;
 }
 
 
@@ -154,5 +155,8 @@ tr:hover {
   justify-content:left;
 }
 
+.errorMessage {
+  color: red;
+}
 
 

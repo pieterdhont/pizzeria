@@ -3,23 +3,7 @@
 {% block title %}Registratie{% endblock %}
 
 {% block extra_head %}
-    <script>
-        function toggleAccountFields() {
-            const checkbox = document.getElementById("createAccount");
-            const fields = document.getElementById("accountFields");
-            const submitButton = document.querySelector('input[type="submit"]');
-            
-            if (!checkbox) return; 
-            
-            if (checkbox.checked) {
-                fields.style.display = "block";
-                submitButton.disabled = false;
-            } else {
-                fields.style.display = "none";
-                submitButton.disabled = true;
-            }
-        }
-    </script>
+    <script src = "js/toggleAccountFields.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -28,7 +12,7 @@
         <h2>{% if isKlantLoggedIn %}Update Gegevens{% else %}Registreren{% endif %}</h2>
         
         {% if errorMessage %}
-            <p style="color: red;">{{ errorMessage }}</p>
+        <p class="errorMessage">{{ errorMessage }}</p>
         {% endif %}
         
         <form method="post">
@@ -52,7 +36,7 @@
                 <label for="createAccount">Maak een account aan</label>
                 <input type="checkbox" name="createAccount" id="createAccount" onclick="toggleAccountFields()">
             </div>
-            <div id="accountFields" style="display: none;">
+            <div id="accountFields">
                 <label>Email:</label>
                 <input type="email" name="email"><br>
                 <label>Wachtwoord:</label>
