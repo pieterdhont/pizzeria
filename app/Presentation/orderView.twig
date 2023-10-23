@@ -1,0 +1,57 @@
+{% extends 'base.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<!--orderView.twig-->
+    <h1>Besteloverzicht</h1>
+
+    <h2>Adresgegevens</h2>
+    <p>
+        <strong>Naam:</strong> {{ adresgegevens.getNaam() }}<br>
+        <strong>Voornaam:</strong> {{ adresgegevens.getVoornaam() }}<br>
+        <strong>Straat:</strong> {{ adresgegevens.getStraat() }}<br>
+        <strong>Nummer:</strong> {{ adresgegevens.getNummer() }}<br>
+        <strong>Telefoonnummer:</strong> {{ adresgegevens.getTelnr() }}<br>
+        <strong>Plaats:</strong> {{ adresgegevens.getPlaats().getWoonplaats() }}<br>
+        <strong>Postcode:</strong> {{ adresgegevens.getPlaats().getPostcode() }}<br>
+        <strong>Bemerkingen:</strong> {{ adresgegevens.getBemerkingen() }}<br>
+    </p>
+    <a href="registerController.php">Adresgegevens wijzigen</a>
+
+    <h2>Mandje</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Naam</th>
+                <th>Prijs per stuk</th>
+                <th>Aantal</th>
+                <th>Totaal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in mandjeItems %}
+            {% set productAantal = mandje[product.getProdid()] %}
+            {% set productPrijs = heeftRechtOpPromotie and product.getPromotieprijs() ? product.getPromotieprijs() : product.getPrijs() %}
+            {% set productTotaal = productPrijs * productAantal %}
+            <tr>
+                <td>{{ product.getNaam() }}</td>
+                <td>€{{ productPrijs }}</td>
+                <td>{{ productAantal }}</td>
+                <td>€{{ productTotaal }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h3>Totaalprijs: €{{ totaalprijs }}</h3>
+
+    <form method="post" action="placeOrderController.php">
+        <label for="opmerkingen">Opmerkingen bij de bestelling:</label>
+        <textarea name="opmerkingen" id="opmerkingen" rows="4" cols="50">{{ opmerkingen }}</textarea><br>
+        <input type="submit" value="Bestellen" {% if mandjeItems|length == 0 %}disabled{% endif %}>
+    </form>
+    <p>{{ confirmationMessage }}</p>
+
+    <a href="ProductController.php">Terug naar producten</a>
+    <a href="logout.php">Uitloggen</a>
+{% endblock %}

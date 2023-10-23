@@ -1,0 +1,37 @@
+{% extends 'base.twig' %}
+
+{% block title %}Bestelgeschiedenis{% endblock %}
+
+{% block body %}
+<!--orderHistory.twig-->
+    <h1>Bestelgeschiedenis</h1>
+
+    {% for bestelling in bestellingen %}
+  
+    <p>Datum en tijd: {{ bestelling.getDatumuur().format('d-m-Y H:i:s') }}</p>
+    <p>Opmerkingen: {{ bestelling.getOpmerking() }}</p>
+    <h3>Producten:</h3>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Naam</th>
+                <th>Aantal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bestelregel in bestelregelsList[bestelling.getBestelid()] %}
+            <tr>
+                <td>{{ bestelregel.getProduct().getNaam() }}</td>
+                <td>{{ bestelregel.getAantal() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <h4>Totaalprijs: €{{ bestellingTotaalprijzen[bestelling.getBestelid()] }}</h4>
+    <hr>
+    {% endfor %}
+
+    <a href="ProductController.php">Terug naar producten</a>
+    <a href="logout.php">Uitloggen</a>
+
+{% endblock %}

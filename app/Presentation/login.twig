@@ -1,0 +1,19 @@
+{% extends 'base.twig' %}
+
+{% block title %}Inloggen{% endblock %}
+
+{% block body %}
+<!--login.twig-->
+    <h2>Inloggen</h2>
+    
+    {% if errorMessage %}
+        <p style="color: red;">{{ errorMessage }}</p>
+    {% endif %}
+    
+    <form method="post">
+        Email: <input type="email" name="email" value="{{ email }}" required><br>
+        Wachtwoord: <input type="password" name="wachtwoord" required><br>
+        <input type="submit" value="Inloggen">
+    </form>
+
+{% endblock %}

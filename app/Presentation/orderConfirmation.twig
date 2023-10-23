@@ -1,0 +1,52 @@
+{% extends 'base.twig' %}
+
+{% block title %}Bevesting Bestelling{% endblock %}
+
+{% block body %}
+<!--orderConfirmation.twig-->
+    <h1>Bedankt voor uw bestelling!</h1>
+
+    <h2>Adresgegevens</h2>
+    <p>
+        <strong>Naam:</strong> {{ adresgegevens.getNaam() }}<br>
+        <strong>Voornaam:</strong> {{ adresgegevens.getVoornaam() }}<br>
+        <strong>Straat:</strong> {{ adresgegevens.getStraat() }}<br>
+        <strong>Nummer:</strong> {{ adresgegevens.getNummer() }}<br>
+        <strong>Telefoonnummer:</strong> {{ adresgegevens.getTelnr() }}<br>
+        <strong>Plaats:</strong> {{ adresgegevens.getPlaats().getWoonplaats() }}<br>
+        <strong>Postcode:</strong> {{ adresgegevens.getPlaats().getPostcode() }}<br>
+        <strong>Bemerkingen:</strong> {{ adresgegevens.getBemerkingen() }}<br>
+    </p>
+
+    <h2>Details van uw bestelling:</h2>
+    <p>
+        
+        <strong>Datum en tijd:</strong> {{ bestelling.getDatumuur().format('d-m-Y H:i:s') }}<br>
+        <strong>Opmerkingen:</strong> {{ bestelling.getOpmerking() }}<br>
+        <strong>Totaalprijs:</strong> €{{ totaalprijs }}
+    </p>
+
+    <h2>Producten:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Naam</th>
+                <th>Aantal</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for bestelregel in bestelregels %}
+            <tr>
+                <td>{{ bestelregel.getProduct().getNaam() }}</td>
+                <td>{{ bestelregel.getAantal() }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="ProductController.php">Terug naar producten</a>
+    <a href="logout.php">Uitloggen</a>
+    <a href="OrderHistoryController.php">Bekijk mijn bestelgeschiedenis</a>
+
+
+{% endblock %}

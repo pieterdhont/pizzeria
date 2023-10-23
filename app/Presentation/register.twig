@@ -1,0 +1,68 @@
+{% extends 'base.twig' %}
+
+{% block title %}Registratie{% endblock %}
+
+{% block extra_head %}
+    <script>
+        function toggleAccountFields() {
+            const checkbox = document.getElementById("createAccount");
+            const fields = document.getElementById("accountFields");
+            const submitButton = document.querySelector('input[type="submit"]');
+            
+            if (!checkbox) return; 
+            
+            if (checkbox.checked) {
+                fields.style.display = "block";
+                submitButton.disabled = false;
+            } else {
+                fields.style.display = "none";
+                submitButton.disabled = true;
+            }
+        }
+    </script>
+{% endblock %}
+
+{% block body %}
+<!--register.twig-->
+    <body onload="toggleAccountFields()">
+        <h2>{% if isKlantLoggedIn %}Update Gegevens{% else %}Registreren{% endif %}</h2>
+        
+        {% if errorMessage %}
+            <p style="color: red;">{{ errorMessage }}</p>
+        {% endif %}
+        
+        <form method="post">
+            Naam: <input type="text" name="naam" value="{{ adresgegevens.getNaam()|default('') }}" required><br>
+            Voornaam: <input type="text" name="voornaam" value="{{ adresgegevens.getVoornaam()|default('') }}" required><br>
+            Straat: <input type="text" name="straat" value="{{ adresgegevens.getStraat()|default('') }}" required><br>
+            Nummer: <input type="text" name="nummer" value="{{ adresgegevens.getNummer()|default('') }}" required><br>
+            Telefoonnummer: <input type="tel" name="telnr" value="{{ adresgegevens.getTelnr()|default('') }}" required><br>
+            
+            Plaats: 
+            <select name="plaats">
+                {% for plaats in plaatsen %}
+                    <option value="{{ plaats.getPostid }}" {% if plaats.getPostid == adresgegevens.getPlaats().getPostid|default(null) %} selected {% endif %}>{{ plaats.getWoonplaats }}</option>
+                {% endfor %}
+            </select><br>
+            
+            Bemerkingen: <textarea name="bemerkingen">{{ adresgegevens.getBemerkingen()|default('') }}</textarea><br>
+
+            {% if not isKlantLoggedIn %}
+            <div>
+                <label for="createAccount">Maak een account aan</label>
+                <input type="checkbox" name="createAccount" id="createAccount" onclick="toggleAccountFields()">
+            </div>
+            <div id="accountFields" style="display: none;">
+                <label>Email:</label>
+                <input type="email" name="email"><br>
+                <label>Wachtwoord:</label>
+                <input type="password" name="wachtwoord"><br>
+                <input type="checkbox" name="promotie" id="promotie">
+                <label for="promotie">Ontvang promoties</label><br>
+            </div>
+            {% endif %}
+            
+            <input type="submit" value="Doorgaan" {% if not isKlantLoggedIn %}disabled{% endif %}>
+        </form>
+    </body>
+{% endblock %}
