@@ -22,6 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     try {
         $klant = $klantService->inloggen($email, $wachtwoord);
         $_SESSION["klant"] = $klant->getKlantid();  
+
+        if (isset($_COOKIE['mandje'])) {
+            $_SESSION["mandje"] = json_decode($_COOKIE['mandje'], true);
+        }
         
         
         setcookie("last_login_email", $email, time() + 60*60*24*30, "/", "", false, true);
