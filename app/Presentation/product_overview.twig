@@ -3,91 +3,95 @@
 {% block title %}Product Overzicht{% endblock %}
 
 {% block body %}
-<div class="flex-container">
+<div class="container-fluid">
 
-    <!-- Pizza's section -->
-    <div class="section pizzas">
-        <h2>Onze Pizza's</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Naam</th>
-                    <th>Prijs</th>
-                    <th>Beschrijving</th>
-                    <th>Promotieprijs</th>
-                    <th>Toevoegen aan mandje</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in products %}
-                <tr>
-                    <td>{{ product.getNaam() }}</td>
-                    <td>€{{ product.getPrijs() }}</td>
-                    <td>{{ product.getProductinformatie() }}</td>
-                    <td>
-                        {% if product.getPromotieprijs() %}
-                        €{{ product.getPromotieprijs() }}
-                        {% else %}
-                        -
-                        {% endif %}
-                    </td>
-                    <td>
-                        <form method="post">
-                            <input type="hidden" name="product_id" value="{{ product.getProdid() }}">
-                            <input type="submit" class= "full-width-button" value="Toevoegen" {% if not product.isBeschikbaar() %}disabled{% endif %}>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <div class="row">
+        <!-- Pizza's section -->
+        <div class="col-lg-6 col-md-12">
+            <h2>Onze Pizza's</h2>
+            <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Naam</th>
+                        <th>Prijs</th>
+                        <th>Beschrijving</th>
+                        <th>Promotieprijs</th>
+                        <th>Toevoegen aan mandje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{ product.getNaam() }}</td>
+                        <td>€{{ product.getPrijs() }}</td>
+                        <td>{{ product.getProductinformatie() }}</td>
+                        <td>
+                            {% if product.getPromotieprijs() %}
+                            €{{ product.getPromotieprijs() }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <form method="post">
+                                <input type="hidden" name="product_id" value="{{ product.getProdid() }}">
+                                <input type="submit" class="btn btn-primary" value="Toevoegen" {% if not product.isBeschikbaar() %}disabled{% endif %}>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
 
-    <!-- Mandje section -->
-    <div class="section mandje">
-        <h2>Mandje</h2>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Product Naam</th>
-                    <th>Aantal</th>
-                    <th>Acties</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for product in mandjeItems %}
-                <tr>
-                    <td>{{ product.getNaam() }}</td>
-                    <td>{{ mandje[product.getProdid()] }}</td>
-                    <td>
-                       <div class="button-container">
-                        <form method="post">
-                            <input type="hidden" name="remove_one_product_id" value="{{ product.getProdid() }}">
-                            <input type="submit" class= "full-width-button" value="-">
-                        </form>
-                        <form method="post">
-                            <input type="hidden" name="increase_product_id" value="{{ product.getProdid() }}">
-                            <input type="submit" class= "full-width-button" value="+">
-                        </form>
-                      </div> 
-                        <form method="post">
-                            <input type="hidden" name="remove_product_id" value="{{ product.getProdid() }}">
-                            <input type="submit" class ="indep-width-button" value="Verwijder">
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <h3>Totaalprijs: €{{ totaalprijs }}</h3>
-            <form method="post">
-                <input type="submit" name="checkout" value="Afrekenen" {% if mandjeItems|length == 0 %}disabled{% endif %}>
-            </form>
+        <!-- Mandje section -->
+        <div class="col-lg-6 col-md-12">
+            <h2>Mandje</h2>
+            <div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Product Naam</th>
+                        <th>Aantal</th>
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in mandjeItems %}
+                    <tr>
+                        <td>{{ product.getNaam() }}</td>
+                        <td>{{ mandje[product.getProdid()] }}</td>
+                        <td>
+                           <div class="btn-group">
+                            <form method="post" class="form-inline">
+                                <input type="hidden" name="remove_one_product_id" value="{{ product.getProdid() }}">
+                                <input type="submit" class="btn btn-danger" value="-">
+                            </form>
+                            <form method="post" class="form-inline">
+                                <input type="hidden" name="increase_product_id" value="{{ product.getProdid() }}">
+                                <input type="submit" class="btn btn-success" value="+">
+                            </form>
+                          </div> 
+                            <form method="post" class="form-inline">
+                                <input type="hidden" name="remove_product_id" value="{{ product.getProdid() }}">
+                                <input type="submit" class="btn btn-warning" value="Verwijder">
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            <h3>Totaalprijs: €{{ totaalprijs }}</h3>
+                <form method="post">
+                    <input type="submit" class="btn btn-primary" name="checkout" value="Afrekenen" {% if mandjeItems|length == 0 %}disabled{% endif %}>
+                </form>
+        </div>
     </div>
 
 </div>
 
-
-
-<a href="logout.php">Uitloggen</a>
+<a class="btn btn-primary" href="logout.php">Uitloggen</a>
 {% endblock %}

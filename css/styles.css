@@ -1,5 +1,11 @@
 /* styles.css */
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -8,7 +14,7 @@ body {
 }
 
 .container {
-  width: 80%;
+  max-width: 100%;
   margin: auto;
   overflow: hidden;
 }
@@ -20,17 +26,20 @@ header {
   text-align: center;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   color: #333;
-  margin-left: 10px
+  margin-left: 10px;
 }
 
 p {
   margin-left: 10px;
-  margin-top: 20px;             
-  margin-bottom: 20px;          
-  font-size: 16px;             
-  line-height: 1.5;            
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 a {
@@ -49,41 +58,41 @@ a:hover {
 }
 
 form {
-
-  padding: 10px;
+  width: 100%;
+  padding: 5px;
   margin-top: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-form input[type="text"], 
-form input[type="email"], 
-form input[type="password"], 
-form input[type="tel"], 
-form textarea, 
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="tel"],
+form textarea,
 form select {
-  width: 30%;
+  /* width: 30%; */
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
 }
 
 form input[type="submit"] {
-  background-color: #50b3a2;
+  /* background-color: #e2ca15; */
   color: #fff;
   padding: 10px 15px;
   border: none;
   cursor: pointer;
-  width: 30%;
+  /* width: 30%; */
 }
 
 form input[type="submit"].full-width-button {
-  width: 100%;
+  width: auto;
 }
 
 form input[type="submit"].indep-width-button {
-  width: 37.5%;
+  width: auto;
 }
 
 form input[type="submit"]:hover {
@@ -91,22 +100,18 @@ form input[type="submit"]:hover {
 }
 
 form input[type="submit"]:disabled {
-  background-color: #ccc; 
-  cursor: not-allowed; 
+  background-color: #ccc;
+  cursor: not-allowed;
 }
-
 
 #accountFields {
   width: 100%;
   display: none;
 }
 
-
 #accountFields > * {
   display: block;
 }
-
-
 
 .alert {
   color: red;
@@ -114,16 +119,20 @@ form input[type="submit"]:disabled {
 }
 
 table {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid #ddd;
 }
 
-th, td {
+th,
+td {
   padding: 8px;
   text-align: left;
 }
@@ -139,11 +148,11 @@ tr:hover {
 .flex-container {
   display: flex;
   justify-content: space-between;
-  gap: 20px; 
+  gap: 20px;
 }
 
 .section {
-  width: 48%; 
+  /* width: 48%;  */
   background-color: #fff;
   padding: 20px;
   border: 1px solid #ddd;
@@ -152,11 +161,38 @@ tr:hover {
 .button-container {
   display: flex;
   align-items: center;
-  justify-content:left;
+  justify-content: flex-start;
 }
 
 .errorMessage {
   color: red;
 }
 
+@media (max-width: 768px) {
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"],
+  form input[type="tel"],
+  form textarea,
+  form select {
+  width: 100%; 
+  }
+  }
 
+  
+@media (max-width: 768px) {
+.button-container, .flex-container {
+padding: 0 15px;
+}
+h1, h2, h3, h4, p, a {
+margin-left: 0; 
+}
+}
+
+
+@media (min-width: 992px) and (max-width: 1072px) {
+  .col-lg-6 {
+    padding-right: 290px; /* Adjust the right padding */
+    padding-left: 290px;  /* Adjust the left padding */
+  }
+}
