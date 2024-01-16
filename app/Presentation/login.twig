@@ -4,16 +4,19 @@
 
 {% block body %}
 <!--login.twig-->
-    <h2>Inloggen</h2>
+    <div>
+    <h2 class="pt-4 mb-4 ms-4">Inloggen</h2>
     
     {% if errorMessage %}
     <p class="errorMessage">{{ errorMessage }}</p>
     {% endif %}
     
     <form method="post">
-        Email: <input type="email" name="email" value="{{ email }}" required><br>
-        Wachtwoord: <input type="password" name="wachtwoord" required><br>
-        <input type="submit" value="Inloggen">
+        <label class="ms-4" for="floatingInput">Email address</label>
+          <input  placeholder="name@example.com" type="email" name="email" value="{{ email }}" required><br>
+          <label class="ms-4" for="floatingPassword">Wachtwoord</label> 
+          <input placeholder="Wachtwoord" type="password" name="wachtwoord" required><br>
+        <input class="inloggen btn btn-teal" type="submit" value="Inloggen">
     </form>
-
+</div>
 {% endblock %}

@@ -4,9 +4,9 @@
 
 {% block body %}
 <!--orderView.twig-->
-    <h1>Besteloverzicht</h1>
+    <h1 class="pt-3">Besteloverzicht</h1>
 
-    <h2>Adresgegevens</h2>
+    <h2 class="mt-5">Adresgegevens</h2>
     <p>
         <strong>Naam:</strong> {{ adresgegevens.getNaam() }}<br>
         <strong>Voornaam:</strong> {{ adresgegevens.getVoornaam() }}<br>
@@ -17,9 +17,10 @@
         <strong>Postcode:</strong> {{ adresgegevens.getPlaats().getPostcode() }}<br>
         <strong>Bemerkingen:</strong> {{ adresgegevens.getBemerkingen() }}<br>
     </p>
-    <a href="registerController.php">Adresgegevens wijzigen</a>
+    <a class="btn btn-teal specific-element" href="registerController.php">Adresgegevens wijzigen</a>
 
-    <h2>Mandje</h2>
+    <h2 class="mt-5">Mandje</h2>
+    <div class="table-responsive col-lg-6 col-md-8">
     <table border="1">
         <thead>
             <tr>
@@ -43,15 +44,19 @@
         {% endfor %}
         </tbody>
     </table>
-    <h3>Totaalprijs: €{{ totaalprijs }}</h3>
+</div>
+    <h3 class="mt-5">Totaalprijs: €{{ totaalprijs }}</h3>
 
     <form method="post" action="placeOrderController.php">
         <label for="opmerkingen">Opmerkingen bij de bestelling:</label>
         <textarea name="opmerkingen" id="opmerkingen" rows="4" cols="50">{{ opmerkingen }}</textarea><br>
-        <input type="submit" value="Bestellen" {% if mandjeItems|length == 0 %}disabled{% endif %}>
+        <input  class="specific-element btn btn-teal" type="submit" value="Bestellen" {% if mandjeItems|length == 0 %}disabled{% endif %}>
     </form>
     <p>{{ confirmationMessage }}</p>
-
-    <a href="ProductController.php">Terug naar producten</a>
-    <a href="logout.php">Uitloggen</a>
+    
+    <div class="mt-5 pb-3">
+    <a class="btn btn-teal specific-element ms-1" href="ProductController.php">Terug naar producten</a>
+    <a class="btn btn-teal specific-element" href="logout.php">Uitloggen</a>
+    <a class="btn btn-teal specific-element" href="OrderHistoryController.php">Bekijk mijn bestelgeschiedenis</a>
+</div>
 {% endblock %}

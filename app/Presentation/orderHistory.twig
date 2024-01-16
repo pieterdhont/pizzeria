@@ -1,16 +1,14 @@
-{% extends 'base.twig' %}
-
-{% block title %}Bestelgeschiedenis{% endblock %}
-
-{% block body %}
+{% extends 'base.twig' %} {% block title %}Bestelgeschiedenis{% endblock %} {%
+block body %}
 <!--orderHistory.twig-->
-    <h1>Bestelgeschiedenis</h1>
+<h1 class="pt-3">Bestelgeschiedenis</h1>
 
-    {% for bestelling in bestellingen %}
-  
-    <p>Datum en tijd: {{ bestelling.getDatumuur().format('d-m-Y H:i:s') }}</p>
-    <p>Opmerkingen: {{ bestelling.getOpmerking() }}</p>
-    <h3>Producten:</h3>
+{% for bestelling in bestellingen %}
+<hr/>
+<p>Datum en tijd: {{ bestelling.getDatumuur().format("d-m-Y H:i:s") }}</p>
+<p>Opmerkingen: {{ bestelling.getOpmerking() }}</p>
+<h3>Producten:</h3>
+<div class="table-responsive mb-5 col-lg-6 col-md-8">
     <table border="1">
         <thead>
             <tr>
@@ -19,19 +17,20 @@
             </tr>
         </thead>
         <tbody>
-        {% for bestelregel in bestelregelsList[bestelling.getBestelid()] %}
+            {% for bestelregel in bestelregelsList[bestelling.getBestelid()] %}
             <tr>
                 <td>{{ bestelregel.getProduct().getNaam() }}</td>
                 <td>{{ bestelregel.getAantal() }}</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
-    <h4>Totaalprijs: €{{ bestellingTotaalprijzen[bestelling.getBestelid()] }}</h4>
-    <hr>
-    {% endfor %}
-
-    <a href="ProductController.php">Terug naar producten</a>
-    <a href="logout.php">Uitloggen</a>
-
+</div>
+<h4>Totaalprijs: €{{ bestellingTotaalprijzen[bestelling.getBestelid()] }}</h4>
+<hr/>
+{% endfor %}
+<div class="mt-5 pb-3">
+<a class="btn btn-teal specific-element" href="ProductController.php">Terug naar producten</a>
+<a class="btn btn-teal specific-element" href="logout.php">Uitloggen</a>
+</div>
 {% endblock %}
