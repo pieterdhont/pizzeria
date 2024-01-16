@@ -25,11 +25,13 @@ try {
         }
     }
 
+    $jsondata = file_get_contents("pizzas.json");
+    $pizza = json_decode($jsondata, true);
     $products = $productService->getAllProducts();
     $mandjeData = $productService->getMandjeData($mandje, $klantService, $klantId);
 
-    echo $twig->render('product_overview.twig', $mandjeData + ['products' => $products]);
+    echo $twig->render('product_overview.twig', $mandjeData + ['products' => $products] + ['pizza' => $pizza]);
 } catch (Exception $e) {
     echo "Er is een fout opgetreden: " . $e->getMessage();
 }
-?>
+

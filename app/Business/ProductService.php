@@ -104,4 +104,3 @@ public function handleMandjePostRequest(array &$mandje, array $postData, KlantSe
 
 }
 
-?>

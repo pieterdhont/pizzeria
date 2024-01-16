@@ -189,10 +189,61 @@ margin-left: 0;
 }
 }
 
-
-@media (min-width: 992px) and (max-width: 1072px) {
-  .col-lg-6 {
-    padding-right: 290px; /* Adjust the right padding */
-    padding-left: 290px;  /* Adjust the left padding */
-  }
+/* Card styles */
+.card {
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
 }
+
+.card-img-top {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  height: 200px; /* Adjust the height as needed */
+}
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+
+/* Align the buttons in the cart */
+.item-actions {
+  display: flex;
+  align-items: center;
+gap: 0.5rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 767px) {
+.menu-item, .cart-item {
+/* Full width on smaller screens */
+flex-basis: 100%;
+}
+}
+
+@media (min-width: 768px) {
+  .menu-item, .cart-item {
+  /* Adjust to half-width on medium screens and up */
+  flex-basis: calc(50% - 1rem); /* Adjust the calc() as needed */
+  }
+  }
+
+  @media (min-width: 1200px) {
+    .menu-item, .cart-item {
+    /* Revert to default flex-basis on large screens */
+    flex-basis: auto;
+    }
+    }
+
+    /* Make sure form-inline has no additional padding or margins that could disrupt layout */
+.form-inline {
+  margin: 0;
+  padding: 0;
+  }
