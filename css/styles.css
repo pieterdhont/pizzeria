@@ -86,7 +86,6 @@ form input[type="submit"] {
 
   color: #fff;
 
-  border: none;
   cursor: pointer;
   /* width: 30%; */
 }
@@ -228,6 +227,18 @@ tr:hover {
   margin-left: 0.625rem;
 }
 
+.mango {
+  background: #ffe259; /* fallback for old browsers */
+  background: linear-gradient(to right, #ffa751, #ffe259);
+  border: none;
+}
+
+.mango:hover {
+  
+  background: linear-gradient(to left, #ffa751, #ffe259);
+  border: none;
+}
+
 .btn-teal {
   background-color: #333;
   /* Define your teal color */
@@ -308,7 +319,6 @@ tr:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
   }
 
   .form-inline button {
