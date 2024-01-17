@@ -91,9 +91,9 @@ form input[type="submit"] {
   /* width: 30%; */
 }
 
-.inloggen {
+/* .inloggen {
   margin-inline-start: 1.25rem;
-}
+} */
 
 form input[type="submit"].full-width-button {
   width: auto;
