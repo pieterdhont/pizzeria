@@ -4,9 +4,15 @@
 
 {% block body %}
 <!--index.twig-->
-    <h2 class="pt-4 ms-4 mb-5"><strong>Welkom bij onze pizzeria!</strong></h2>
+    <div class="container-fluid py-4">
+        
+            
+            <div class="col-lg-6 col-md-12">
+                <h2 class="pt-4 mb-5"><strong>Welkom bij onze pizzeria!</strong></h2>
+                <a class="btn btn-teal mb-3"href="loginController.php">Inloggen</a>
+                <br>
+                <a class="btn btn-teal"href="ProductController.php">Bekijk onze producten</a>
+            </div>
+    </div>
     
-    <a class="ms-4 btn btn-teal mb-3"href="loginController.php">Inloggen</a>
-    <br>
-    <a class="ms-4 btn btn-teal"href="ProductController.php">Bekijk onze producten</a>
 {% endblock %}
